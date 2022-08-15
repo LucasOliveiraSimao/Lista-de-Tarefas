@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Lista de Tarefas</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="note_title">Título</string>
+    <string name="note_description">Descrição</string>
+    <string name="save">Salvar</string>
+    <string name="title_field_cannot_be_empty">Campo título não pode ficar vazio</string>
+    <string name="description_field_cannot_be_empty">Campo descrição não pode ficar vazio</string>
 </resources>
