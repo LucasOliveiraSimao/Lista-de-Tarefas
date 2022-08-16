@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.lucassimao.listadetarefas.R
@@ -25,15 +25,21 @@ class InsertNoteFragment : Fragment() {
 
     ): View {
         binding = FragmentInsertNoteBinding.inflate(inflater, container, false)
+        val bundle = arguments?.getParcelable<NoteModel>("key")
+
+        setupUpdateNote(bundle)
+
 
         binding.btnSaveNote.setOnClickListener {
             if (!isEmptyNoteField(binding.etNoteTitle)) {
                 emptyFieldMessage(context, getString(R.string.title_field_cannot_be_empty)).show()
             } else if (!isEmptyNoteField(binding.etNoteDesc)) {
-                emptyFieldMessage(context, getString(R.string.description_field_cannot_be_empty)).show()
+                emptyFieldMessage(
+                    context,
+                    getString(R.string.description_field_cannot_be_empty)
+                ).show()
             } else {
-                val note = setupNote(binding.etNoteTitle, binding.etNoteDesc)
-                viewModel.insertNote(note)
+                checkInsertOrUpdateNote(bundle)
             }
 
             finishFragment()
@@ -43,14 +49,48 @@ class InsertNoteFragment : Fragment() {
         return binding.root
     }
 
+    private fun checkInsertOrUpdateNote(bundle: NoteModel?) {
+        if (bundle != null) {
+            val note = setupUpdateNote(
+                bundle.note_id,
+                binding.etNoteTitle,
+                binding.etNoteDesc
+            )
+            viewModel.updateNote(note)
+        } else {
+            val note = setupInsertNote(binding.etNoteTitle, binding.etNoteDesc)
+            viewModel.insertNote(note)
+        }
+    }
+
+    private fun setupUpdateNote(bundle: NoteModel?) {
+        if (bundle != null) {
+            binding.etNoteTitle.setText(bundle.note_title)
+            binding.etNoteDesc.setText(bundle.note_desc)
+        }
+    }
+
     private fun finishFragment() {
         findNavController().popBackStack()
     }
 
-    private fun setupNote(etNoteTitle: EditText, etNoteDesc: EditText): NoteModel {
+    private fun setupInsertNote(
+        etNoteTitle: AppCompatEditText,
+        etNoteDesc: AppCompatEditText
+    ): NoteModel {
         val noteTile = etNoteTitle.text.toString()
         val noteDesc = etNoteDesc.text.toString()
 
         return NoteModel(0, noteTile, noteDesc)
+    }
+
+    private fun setupUpdateNote(
+        noteID: Int,
+        etNoteTitle: AppCompatEditText,
+        etNoteDesc: AppCompatEditText
+    ): NoteModel {
+        val noteTile = etNoteTitle.text.toString()
+        val noteDesc = etNoteDesc.text.toString()
+        return NoteModel(noteID, noteTile, noteDesc)
     }
 }
