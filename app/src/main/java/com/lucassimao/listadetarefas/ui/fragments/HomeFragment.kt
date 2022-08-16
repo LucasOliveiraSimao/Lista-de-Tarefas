@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.lucassimao.listadetarefas.R
 import com.lucassimao.listadetarefas.data.model.NoteModel
 import com.lucassimao.listadetarefas.databinding.FragmentHomeBinding
 import com.lucassimao.listadetarefas.ui.NoteViewModel
@@ -36,6 +37,9 @@ class HomeFragment : Fragment() {
         adapter = NotesAdapter(
             onItemClick = {
                 deleteNote(it)
+            },
+            onLongItemClick = { note ->
+                goToUpdateNoteFragment(note)
             }
         )
 
@@ -43,6 +47,14 @@ class HomeFragment : Fragment() {
         viewModel.allNotes.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
+    }
+
+    private fun goToUpdateNoteFragment(note: NoteModel) {
+        val bundle = Bundle()
+        bundle.putParcelable("key", note)
+        findNavController().navigate(
+            R.id.action_homeFragment_to_insertNoteFragment, bundle
+        )
     }
 
     private fun deleteNote(it: NoteModel) {
