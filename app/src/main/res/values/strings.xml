@@ -6,4 +6,5 @@
     <string name="save">Salvar</string>
     <string name="title_field_cannot_be_empty">Campo título não pode ficar vazio</string>
     <string name="description_field_cannot_be_empty">Campo descrição não pode ficar vazio</string>
+    <string name="insert_note">Inserir Nota</string>
 </resources>
