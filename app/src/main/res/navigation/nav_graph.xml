@@ -6,12 +6,12 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/insertNoteFragment"
-        android:name="com.lucassimao.listadetarefas.ui.InsertNoteFragment"
+        android:name="com.lucassimao.listadetarefas.ui.fragments.InsertNoteFragment"
         android:label="fragment_insert_note"
         tools:layout="@layout/fragment_insert_note" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.lucassimao.listadetarefas.ui.HomeFragment"
+        android:name="com.lucassimao.listadetarefas.ui.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
