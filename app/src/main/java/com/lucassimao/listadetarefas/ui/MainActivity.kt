@@ -1,7 +1,8 @@
-package com.lucassimao.listadetarefas
+package com.lucassimao.listadetarefas.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.lucassimao.listadetarefas.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
