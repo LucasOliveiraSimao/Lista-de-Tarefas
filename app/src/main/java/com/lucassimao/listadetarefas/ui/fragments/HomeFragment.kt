@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
         val bundle = Bundle()
         bundle.putParcelable("key", note)
         findNavController().navigate(
-            R.id.action_homeFragment_to_insertNoteFragment, bundle
+            R.id.action_homeFragment_to_updateNoteFragment, bundle
         )
     }
 
