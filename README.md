@@ -6,7 +6,6 @@ Projeto desenvolvido utilizando:
  - Arquitetura MVVM
  - Coroutines
  - Injeção de Dependência com Koin
- - Retrofit
  - Room Database
  
  #Telas
