@@ -2,10 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_note"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="5dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/bg_card_view"
+    app:cardCornerRadius="25dp"
     app:cardElevation="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,40 +15,51 @@
         android:layout_height="match_parent"
         android:layout_margin="5dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/item_title_note"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Nota" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:id="@+id/item_desc_note"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_title_note"
             tools:text="Desc" />
 
+        <TextView
+            android:id="@+id/item_desc_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_desc_note"
+            tools:text="01/01/2022 - 10:00" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_delete_note"
+        <ImageView
+            android:id="@+id/iv_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete"
+            android:src="@drawable/ic_more"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

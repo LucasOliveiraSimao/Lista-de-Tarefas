@@ -10,4 +10,6 @@
     <string name="note_date">Data</string>
     <string name="note_hour">Hora</string>
     <string name="cancel">Cancelar</string>
+    <string name="edit_note">Editar</string>
+    <string name="delete_note">Excluir</string>
 </resources>

@@ -63,11 +63,11 @@ class InsertNoteFragment : Fragment() {
                     )
 
                     viewModel.insertNote(newNote)
+                    finishFragment()
                 }
 
             }
 
-            finishFragment()
         }
 
         binding.btnCancelNote.setOnClickListener {
@@ -120,6 +120,7 @@ class InsertNoteFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun FragmentInsertNoteBinding.setupHour() {
         val timePicker = MaterialTimePicker.Builder()
             .setTimeFormat(TimeFormat.CLOCK_24H)
@@ -168,7 +169,11 @@ class InsertNoteFragment : Fragment() {
         val noteDate = date?.text.toString()
         val noteHour = hour?.text.toString()
 
-        return NoteModel(0, noteTile, noteDesc, noteDate, noteHour, colorNote)
+        return if (colorNote > 0) {
+            NoteModel(0, noteTile, noteDesc, noteDate, noteHour, colorNote)
+        } else {
+            NoteModel(0, noteTile, noteDesc, noteDate, noteHour, resources.getColor(R.color.white))
+        }
 
     }
 
