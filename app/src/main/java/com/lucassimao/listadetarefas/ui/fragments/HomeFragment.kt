@@ -34,14 +34,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = NotesAdapter(
-            onItemClick = {
-                deleteNote(it)
-            },
-            onLongItemClick = { note ->
-                goToUpdateNoteFragment(note)
-            }
-        )
+        adapter = NotesAdapter()
+
+        deleteNote()
 
         binding.rvListNotes.adapter = adapter
         viewModel.allNotes.observe(viewLifecycleOwner) {
@@ -57,8 +52,11 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun deleteNote(it: NoteModel) {
-        viewModel.deleteNote(it)
+    private fun deleteNote() {
+        adapter.deleteNote = {
+            viewModel.deleteNote(it)
+        }
+
     }
 
 }

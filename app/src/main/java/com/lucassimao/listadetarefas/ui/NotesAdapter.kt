@@ -10,12 +10,12 @@ import com.lucassimao.listadetarefas.databinding.ItemNoteBinding
 import com.lucassimao.listadetarefas.utils.showPopMenu
 
 class NotesAdapter(
-    private val onItemClick: (NoteModel) -> Unit,
-    private val onLongItemClick: (NoteModel) -> Unit
 ) : ListAdapter<NoteModel, NotesViewHolder>(NoteModel) {
 
+    var deleteNote: (NoteModel) -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
-        return NotesViewHolder.from(parent, onItemClick, onLongItemClick)
+        return NotesViewHolder.from(parent, deleteNote)
     }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
@@ -25,8 +25,7 @@ class NotesAdapter(
 
 class NotesViewHolder(
     private val binding: ItemNoteBinding,
-    private val onItemClick: (NoteModel) -> Unit,
-    private val onLongItemClick: (NoteModel) -> Unit
+    private val deleteNote: (NoteModel) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     @SuppressLint("SetTextI18n")
@@ -38,11 +37,7 @@ class NotesViewHolder(
             itemDescDate.text = "${item.note_date} - ${item.note_hour}"
 
             ivMore.setOnClickListener {
-                showPopMenu(item, ivMore)
-            }
-            itemView.setOnClickListener {
-                onLongItemClick(item)
-                return@setOnClickListener
+                showPopMenu(item, ivMore, deleteNote)
             }
         }
     }
@@ -50,13 +45,11 @@ class NotesViewHolder(
     companion object {
         fun from(
             parent: ViewGroup,
-            onItemClick: (NoteModel) -> Unit,
-            onLongItemClick: (NoteModel) -> Unit
+            deleteNote: (NoteModel) -> Unit,
         ): NotesViewHolder {
             return NotesViewHolder(
                 ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                onItemClick,
-                onLongItemClick
+                deleteNote
             )
         }
     }
