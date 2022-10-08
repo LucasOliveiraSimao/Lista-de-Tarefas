@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.lucassimao.listadetarefas.R
@@ -37,7 +36,7 @@ class UpdateNoteFragment : Fragment() {
                     getString(R.string.description_field_cannot_be_empty)
                 ).show()
             } else {
-                updateNote(bundle)
+//                updateNote(bundle)
             }
 
             finishFragment()
@@ -55,29 +54,29 @@ class UpdateNoteFragment : Fragment() {
         }
     }
 
-    private fun updateNote(bundle: NoteModel?) {
-        if (bundle != null) {
-            val note = setupUpdateNote(
-                bundle.note_id,
-                binding.etUpdateNoteTitle,
-                binding.etUpdateNoteDesc
-            )
-            viewModel.updateNote(note)
-        }
-    }
+//    private fun updateNote(bundle: NoteModel?) {
+//        if (bundle != null) {
+//            val note = setupUpdateNote(
+//                bundle.note_id,
+//                binding.etUpdateNoteTitle,
+//                binding.etUpdateNoteDesc
+//            )
+//            viewModel.updateNote(note)
+//        }
+//    }
 
     private fun finishFragment() {
         findNavController().popBackStack()
     }
 
-    private fun setupUpdateNote(
-        noteID: Int,
-        etNoteTitle: AppCompatEditText,
-        etNoteDesc: AppCompatEditText
-    ): NoteModel {
-        val noteTile = etNoteTitle.text.toString()
-        val noteDesc = etNoteDesc.text.toString()
-        return NoteModel(noteID, noteTile, noteDesc)
-    }
+//    private fun setupUpdateNote(
+//        noteID: Int,
+//        etNoteTitle: AppCompatEditText,
+//        etNoteDesc: AppCompatEditText
+//    ): NoteModel {
+//        val noteTile = etNoteTitle.text.toString()
+//        val noteDesc = etNoteDesc.text.toString()
+//        return NoteModel(noteID, noteTile, noteDesc)
+//    }
 
 }
