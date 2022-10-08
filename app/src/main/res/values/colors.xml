@@ -8,12 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="black_shade_1">#0e2433</color>
-    <color name="black_shade_2">#1C4966</color>
-    <color name="black_shade_3">#22252D</color>
-    <color name="gray">#424242</color>
-    <color name="yellow">#ffa500</color>
-    <color name="dark_blue_shade">#0D2162</color>
-    <color name="dark_blue_shade_2">#17388E</color>
-    <color name="light_blue_shade">#12B2E6</color>
+    <color name="red_500">#f44336</color>
+    <color name="pink_500">#e91e63</color>
+    <color name="deep_purple_500">#673ab7</color>
+    <color name="green_500">#4caf50</color>
+    <color name="yellow_500">#ffeb3b</color>
+    <color name="orange_500">#ff9800</color>
 </resources>
