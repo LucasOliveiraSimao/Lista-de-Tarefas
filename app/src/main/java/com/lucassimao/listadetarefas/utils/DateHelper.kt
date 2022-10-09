@@ -1,10 +1,13 @@
 package com.lucassimao.listadetarefas.utils
 
-import java.text.SimpleDateFormat
 import java.util.*
 
-private val local = Locale("pt", "BR")
-
-fun Date.format(): String {
-    return SimpleDateFormat("dd/MM/yyyy", local).format(this)
+fun formatDate(day: Int, month: Int, year: Int): String {
+    val myDay = if (day in 1..9) "0$day" else day
+    return "$myDay/${month + 1}/$year"
 }
+
+private val date = Calendar.getInstance()
+val setupYear = date.get(Calendar.YEAR)
+val setupMonth = date.get(Calendar.MONTH)
+val setupDay = date.get(Calendar.DAY_OF_MONTH)
