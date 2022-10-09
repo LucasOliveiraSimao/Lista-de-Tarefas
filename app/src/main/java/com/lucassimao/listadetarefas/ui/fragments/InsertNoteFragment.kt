@@ -1,7 +1,7 @@
 package com.lucassimao.listadetarefas.ui.fragments
 
 import android.annotation.SuppressLint
-import android.icu.util.TimeZone
+import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,23 +11,19 @@ import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.lucassimao.listadetarefas.R
 import com.lucassimao.listadetarefas.data.model.NoteModel
 import com.lucassimao.listadetarefas.databinding.FragmentInsertNoteBinding
 import com.lucassimao.listadetarefas.ui.NoteViewModel
-import com.lucassimao.listadetarefas.utils.emptyFieldMessage
-import com.lucassimao.listadetarefas.utils.format
-import com.lucassimao.listadetarefas.utils.isEmptyNoteField
+import com.lucassimao.listadetarefas.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class InsertNoteFragment : Fragment() {
     private lateinit var binding: FragmentInsertNoteBinding
     private val viewModel by viewModel<NoteViewModel>()
-    private var colorNote: Int = 0
+    private var colorNote: Int = -1
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -82,21 +78,31 @@ class InsertNoteFragment : Fragment() {
         binding.apply {
             ivColorRed.setOnClickListener {
                 colorNote = context?.resources?.getColor(R.color.red_500)!!
+                containerInsertNote.setBackgroundColor(colorNote)
             }
             ivColorPink.setOnClickListener {
                 colorNote = context?.resources?.getColor(R.color.pink_500)!!
+                containerInsertNote.setBackgroundColor(colorNote)
             }
             ivColorDeepPurple.setOnClickListener {
                 colorNote = context?.resources?.getColor(R.color.deep_purple_500)!!
+                containerInsertNote.setBackgroundColor(colorNote)
             }
             ivColorGreen.setOnClickListener {
                 colorNote = context?.resources?.getColor(R.color.green_500)!!
+                containerInsertNote.setBackgroundColor(colorNote)
             }
             ivColorYellow.setOnClickListener {
                 colorNote = context?.resources?.getColor(R.color.yellow_500)!!
+                containerInsertNote.setBackgroundColor(colorNote)
             }
             ivColorOrange.setOnClickListener {
                 colorNote = context?.resources?.getColor(R.color.orange_500)!!
+                containerInsertNote.setBackgroundColor(colorNote)
+            }
+            ivColorWhite.setOnClickListener {
+                colorNote = context?.resources?.getColor(R.color.white)!!
+                containerInsertNote.setBackgroundColor(colorNote)
             }
         }
 
@@ -140,17 +146,12 @@ class InsertNoteFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun FragmentInsertNoteBinding.setupDate() {
-        val datePicker = MaterialDatePicker.Builder.datePicker().build()
 
-        datePicker.addOnPositiveButtonClickListener {
-            val timeZone = TimeZone.getDefault()
-            val offset = timeZone.getOffset(Date().time * -1)
+        val datePicker = DatePickerDialog(requireContext(), R.style.ThemeDatePicker, { _, y, m, d ->
+            tilNoteDate.editText!!.setText(formatDate(d, m, y))
+        }, setupYear, setupMonth, setupDay)
 
-            tilNoteDate.editText!!.setText(Date(it + offset).format())
-
-        }
-
-        datePicker.show(parentFragmentManager, "")
+        datePicker.show()
     }
 
     private fun finishFragment() {
@@ -169,7 +170,7 @@ class InsertNoteFragment : Fragment() {
         val noteDate = date?.text.toString()
         val noteHour = hour?.text.toString()
 
-        return if (colorNote > 0) {
+        return if (colorNote < 0) {
             NoteModel(0, noteTile, noteDesc, noteDate, noteHour, colorNote)
         } else {
             NoteModel(0, noteTile, noteDesc, noteDate, noteHour, resources.getColor(R.color.white))

@@ -12,4 +12,5 @@
     <string name="cancel">Cancelar</string>
     <string name="edit_note">Editar</string>
     <string name="delete_note">Excluir</string>
+    <string name="update_note">Editar Nota</string>
 </resources>

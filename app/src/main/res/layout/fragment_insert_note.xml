@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/container_insert_note"
     tools:context=".ui.fragments.InsertNoteFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -161,6 +162,15 @@
         android:background="@color/orange_500"
         app:layout_constraintStart_toEndOf="@id/iv_color_yellow"
         app:layout_constraintTop_toTopOf="@id/iv_color_yellow"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_color_white"
+        style="@style/DefaultImageViewSelectedColor"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="@id/iv_color_red"
+        app:layout_constraintTop_toBottomOf="@id/iv_color_red"
         tools:ignore="ContentDescription" />
 
     <com.google.android.material.button.MaterialButton
