@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -35,8 +34,8 @@ class UpdateNoteFragment : Fragment() {
         val bundle = arguments?.getParcelable<NoteModel>(HomeFragment.KEY)
         checkBundleNote(bundle)
 
-        insertListenersButtons()
-        selectedColorNote()
+        setupButtons()
+        setupNoteColorPicker()
 
         binding.btnUpdateSaveNote.setOnClickListener {
 
@@ -49,20 +48,20 @@ class UpdateNoteFragment : Fragment() {
 
             } else {
                 updateNote(bundle)
-                finishFragment()
+                closeScreen()
             }
 
         }
 
         binding.btnUpdateCancelNote.setOnClickListener {
-            finishFragment()
+            closeScreen()
         }
 
         return binding.root
 
     }
 
-    private fun selectedColorNote() {
+    private fun setupNoteColorPicker() {
         binding.apply {
             ivColorRed.setOnClickListener {
                 colorNote = context?.resources?.getColor(R.color.red_500)!!
@@ -96,7 +95,7 @@ class UpdateNoteFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun insertListenersButtons() {
+    private fun setupButtons() {
         binding.apply {
 
             tilUpdateNoteDate.editText?.setOnClickListener {
@@ -145,6 +144,7 @@ class UpdateNoteFragment : Fragment() {
                 tilUpdateNoteDesc.editText?.setText(bundle.note_desc)
                 tilUpdateNoteDate.editText?.setText(bundle.note_date)
                 tilUpdateNoteHour.editText?.setText(bundle.note_hour)
+                containerUpdateNote.setBackgroundColor(bundle.note_color)
             }
 
         }
@@ -153,45 +153,37 @@ class UpdateNoteFragment : Fragment() {
     private fun updateNote(bundle: NoteModel?) {
         if (bundle != null) {
             binding.apply {
-                val note = setupUpdateNote(
-                    bundle.note_id,
-                    tilUpdateNoteTitle.editText,
-                    tilUpdateNoteDesc.editText,
-                    tilUpdateNoteDate.editText,
-                    tilUpdateNoteHour.editText,
-                    bundle.note_color
-                )
+
+                val id = bundle.note_id
+                val title = tilUpdateNoteTitle.editText?.text.toString()
+                val desc = tilUpdateNoteDesc.editText?.text.toString()
+                val date = tilUpdateNoteDate.editText?.text.toString()
+                val hour = tilUpdateNoteHour.editText?.text.toString()
+                val color = bundle.note_color
+
+                val note = setupUpdateNote(id, title, desc, date, hour, color)
                 viewModel.updateNote(note)
             }
 
         }
     }
 
-    private fun finishFragment() {
+    private fun closeScreen() {
         findNavController().popBackStack()
     }
 
     private fun setupUpdateNote(
-        id: Int,
-        title: EditText?,
-        description: EditText?,
-        date: EditText?,
-        hour: EditText?,
-        color: Int
+        id: Int, title: String, description: String, date: String, hour: String, color: Int
     ): NoteModel {
-        val noteTile = title?.text.toString()
-        val noteDesc = description?.text.toString()
-        val noteDate = date?.text.toString()
-        val noteHour = hour?.text.toString()
 
-        if (colorNote == 0){
+        if (colorNote == 0) {
             colorNote = color
         }
 
         return if (colorNote < 0) {
-            NoteModel(id, noteTile, noteDesc, noteDate, noteHour, colorNote)
+            NoteModel(id, title, description, date, hour, colorNote)
         } else {
-            NoteModel(id, noteTile, noteDesc, noteDate, noteHour, resources.getColor(R.color.white))
+            NoteModel(id, title, description, date, hour, resources.getColor(R.color.white))
         }
 
     }

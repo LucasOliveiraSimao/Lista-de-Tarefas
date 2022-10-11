@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -24,6 +23,7 @@ class InsertNoteFragment : Fragment() {
     private lateinit var binding: FragmentInsertNoteBinding
     private val viewModel by viewModel<NoteViewModel>()
     private var colorNote: Int = -1
+    private var message = ""
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -33,33 +33,34 @@ class InsertNoteFragment : Fragment() {
     ): View {
         binding = FragmentInsertNoteBinding.inflate(inflater, container, false)
 
-        insertListenersButtons()
-        selectedColorNote()
+        setupButtons()
+        setupNoteColorPicker()
 
         binding.btnSaveNote.setOnClickListener {
 
             if (!isEmptyNoteField(binding.tilNoteTitle.editText)) {
 
-                emptyFieldMessage(context, getString(R.string.title_field_cannot_be_empty)).show()
+                message = getString(R.string.title_field_cannot_be_empty)
+                emptyFieldMessage(context, message).show()
 
             } else if (!isEmptyNoteField(binding.tilNoteDesc.editText)) {
 
-                val message = getString(R.string.description_field_cannot_be_empty)
+                message = getString(R.string.description_field_cannot_be_empty)
                 emptyFieldMessage(context, message).show()
 
             } else {
 
                 binding.apply {
 
-                    val newNote = setupInsertNote(
-                        tilNoteTitle.editText,
-                        tilNoteDesc.editText,
-                        tilNoteDate.editText,
-                        tilNoteHour.editText
-                    )
+                    val title = tilNoteTitle.editText?.text.toString()
+                    val desc = tilNoteDesc.editText?.text.toString()
+                    val date = tilNoteDate.editText?.text.toString()
+                    val hour = tilNoteHour.editText?.text.toString()
+
+                    val newNote = setupInsertNote(title, desc, date, hour)
 
                     viewModel.insertNote(newNote)
-                    finishFragment()
+                    closeScreen()
                 }
 
             }
@@ -67,13 +68,13 @@ class InsertNoteFragment : Fragment() {
         }
 
         binding.btnCancelNote.setOnClickListener {
-            finishFragment()
+            closeScreen()
         }
 
         return binding.root
     }
 
-    private fun selectedColorNote() {
+    private fun setupNoteColorPicker() {
 
         binding.apply {
             ivColorRed.setOnClickListener {
@@ -110,7 +111,7 @@ class InsertNoteFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun insertListenersButtons() {
+    private fun setupButtons() {
 
         binding.apply {
 
@@ -154,26 +155,18 @@ class InsertNoteFragment : Fragment() {
         datePicker.show()
     }
 
-    private fun finishFragment() {
+    private fun closeScreen() {
         findNavController().popBackStack()
     }
 
     private fun setupInsertNote(
-        title: EditText?,
-        description: EditText?,
-        date: EditText?,
-        hour: EditText?
+        title: String, description: String, date: String, hour: String
     ): NoteModel {
 
-        val noteTile = title?.text.toString()
-        val noteDesc = description?.text.toString()
-        val noteDate = date?.text.toString()
-        val noteHour = hour?.text.toString()
-
         return if (colorNote < 0) {
-            NoteModel(0, noteTile, noteDesc, noteDate, noteHour, colorNote)
+            NoteModel(0, title, description, date, hour, colorNote)
         } else {
-            NoteModel(0, noteTile, noteDesc, noteDate, noteHour, resources.getColor(R.color.white))
+            NoteModel(0, title, title, title, title, resources.getColor(R.color.white))
         }
 
     }
