@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 
 class NoteViewModel(private val repository: NoteRepository) : ViewModel() {
 
-    fun insertNote(note: NoteModel) {
+    fun insertTask(note: NoteModel) {
         viewModelScope.launch {
             repository.insert(note)
         }

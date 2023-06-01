@@ -34,7 +34,7 @@
         style="@style/DefaultTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/note_title"
+        android:hint="@string/name_task"
         app:layout_constraintEnd_toEndOf="@id/guide_end"
         app:layout_constraintStart_toStartOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/toolbar_update_note">
@@ -51,7 +51,6 @@
         style="@style/DefaultTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/note_description"
         app:layout_constraintEnd_toEndOf="@id/guide_end"
         app:layout_constraintStart_toStartOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/til_update_note_title">
@@ -70,7 +69,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/default_margin_8"
-        android:hint="@string/note_date"
         app:layout_constraintEnd_toStartOf="@id/til_update_note_hour"
         app:layout_constraintStart_toStartOf="@id/guide_start"
         app:layout_constraintTop_toBottomOf="@id/til_update_note_desc"
@@ -91,7 +89,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin_8"
-        android:hint="@string/note_hour"
         app:layout_constraintEnd_toEndOf="@id/guide_end"
         app:layout_constraintStart_toEndOf="@id/til_update_note_date"
         app:layout_constraintTop_toBottomOf="@id/til_update_note_desc"

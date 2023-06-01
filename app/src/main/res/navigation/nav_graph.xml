@@ -18,9 +18,9 @@
     </fragment>
     <fragment
         android:id="@+id/insertNoteFragment"
-        android:name="com.lucassimao.listadetarefas.ui.fragments.InsertNoteFragment"
+        android:name="com.lucassimao.listadetarefas.ui.fragments.InsertTaskFragment"
         android:label="fragment_insert_note"
-        tools:layout="@layout/fragment_insert_note" />
+        tools:layout="@layout/dialog_fragment_insert_task" />
     <fragment
         android:id="@+id/updateNoteFragment"
         android:name="com.lucassimao.listadetarefas.ui.fragments.UpdateNoteFragment"
