@@ -4,18 +4,8 @@ import android.content.Context
 import android.widget.EditText
 import android.widget.Toast
 
-fun isEmptyNoteField(binding: EditText?): Boolean {
-    val note = binding?.text.toString()
-
-    if (note.isNotEmpty()) {
-        return true
-    }
-    if (note.isNotBlank()) {
-        return true
-    }
-
-    return false
-
+fun isTaskFieldEmpty(editText: EditText?): Boolean {
+    return editText?.text.toString().isEmpty()
 }
 
 fun emptyFieldMessage(context: Context?, string: String): Toast = Toast.makeText(
