@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    companion object{
+    companion object {
         const val KEY = "key"
     }
 

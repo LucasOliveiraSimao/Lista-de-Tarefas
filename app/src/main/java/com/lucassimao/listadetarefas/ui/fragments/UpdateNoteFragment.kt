@@ -39,12 +39,12 @@ class UpdateNoteFragment : Fragment() {
 
         binding.btnUpdateSaveNote.setOnClickListener {
 
-            if (!isEmptyNoteField(binding.tilUpdateNoteTitle.editText)) {
-                emptyFieldMessage(context, getString(R.string.title_field_cannot_be_empty)).show()
-            } else if (!isEmptyNoteField(binding.tilUpdateNoteDesc.editText)) {
+            if (!isTaskFieldEmpty(binding.tilUpdateNoteTitle.editText)) {
+                emptyFieldMessage(context, getString(R.string.task_field_cannot_be_empty)).show()
+            } else if (!isTaskFieldEmpty(binding.tilUpdateNoteDesc.editText)) {
 
-                val message = getString(R.string.description_field_cannot_be_empty)
-                emptyFieldMessage(context, message).show()
+//                val message = getString(R.string.description_field_cannot_be_empty)
+//                emptyFieldMessage(context, message).show()
 
             } else {
                 updateNote(bundle)
