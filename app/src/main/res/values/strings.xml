@@ -3,9 +3,8 @@
     <string name="name_task">Tarefa</string>
     <string name="save">Salvar</string>
     <string name="task_field_cannot_be_empty">Campo tarefa não pode ficar vazio</string>
-    <string name="insert_task">Inserir Tarefa</string>
     <string name="cancel">Cancelar</string>
     <string name="edit_note">Editar</string>
     <string name="delete_note">Excluir</string>
-    <string name="update_note">Editar Nota</string>
+    <string name="insert_task">Inserir tarefa</string>
 </resources>

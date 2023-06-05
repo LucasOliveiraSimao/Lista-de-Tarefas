@@ -1,4 +1,4 @@
-package com.lucassimao.listadetarefas.ui
+package com.lucassimao.listadetarefas.ui.home
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -9,17 +9,17 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lucassimao.listadetarefas.R
-import com.lucassimao.listadetarefas.data.model.NoteModel
+import com.lucassimao.listadetarefas.data.model.TaskModel
 import com.lucassimao.listadetarefas.databinding.ItemNoteBinding
 import com.lucassimao.listadetarefas.utils.CODE_COLOR_DEEP_PURPLE
 import com.lucassimao.listadetarefas.utils.CODE_COLOR_GREEN
 import com.lucassimao.listadetarefas.utils.CODE_COLOR_RED
 import com.lucassimao.listadetarefas.utils.showPopMenu
 
-class NotesAdapter : ListAdapter<NoteModel, NotesViewHolder>(NoteModel) {
+class NotesAdapter : ListAdapter<TaskModel, NotesViewHolder>(TaskModel) {
 
-    var deleteNote: (NoteModel) -> Unit = {}
-    var updateNote: (NoteModel) -> Unit = {}
+    var deleteNote: (TaskModel) -> Unit = {}
+    var updateNote: (TaskModel) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         return NotesViewHolder.from(parent, deleteNote, updateNote)
@@ -33,13 +33,13 @@ class NotesAdapter : ListAdapter<NoteModel, NotesViewHolder>(NoteModel) {
 
 class NotesViewHolder(
     private val binding: ItemNoteBinding,
-    private val deleteNote: (NoteModel) -> Unit,
-    private val updateNote: (NoteModel) -> Unit,
+    private val deleteNote: (TaskModel) -> Unit,
+    private val updateNote: (TaskModel) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("SetTextI18n")
-    fun bind(item: NoteModel) {
+    fun bind(item: TaskModel) {
         binding.apply {
             containerNote.setCardBackgroundColor(item.note_color)
 
@@ -78,8 +78,8 @@ class NotesViewHolder(
     companion object {
         fun from(
             parent: ViewGroup,
-            deleteNote: (NoteModel) -> Unit,
-            updateNote: (NoteModel) -> Unit,
+            deleteNote: (TaskModel) -> Unit,
+            updateNote: (TaskModel) -> Unit,
         ): NotesViewHolder {
             return NotesViewHolder(
                 ItemNoteBinding.inflate(LayoutInflater.from(parent.context), parent, false),

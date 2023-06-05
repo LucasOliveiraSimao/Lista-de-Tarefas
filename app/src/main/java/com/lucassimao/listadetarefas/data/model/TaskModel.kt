@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "note_table")
 @Parcelize
-data class NoteModel(
+data class TaskModel(
     @PrimaryKey(autoGenerate = true)
     var note_id: Int,
     val note_title: String,
@@ -22,12 +22,12 @@ data class NoteModel(
     val note_color: Int
 ) : Parcelable {
 
-    companion object : DiffUtil.ItemCallback<NoteModel>() {
-        override fun areItemsTheSame(oldItem: NoteModel, newItem: NoteModel): Boolean {
+    companion object : DiffUtil.ItemCallback<TaskModel>() {
+        override fun areItemsTheSame(oldItem: TaskModel, newItem: TaskModel): Boolean {
             return oldItem.note_id == newItem.note_id
         }
 
-        override fun areContentsTheSame(oldItem: NoteModel, newItem: NoteModel): Boolean {
+        override fun areContentsTheSame(oldItem: TaskModel, newItem: TaskModel): Boolean {
             return oldItem == newItem
         }
     }
