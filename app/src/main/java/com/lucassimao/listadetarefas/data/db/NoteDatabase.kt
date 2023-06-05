@@ -3,10 +3,10 @@ package com.lucassimao.listadetarefas.data.db
 import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.lucassimao.listadetarefas.data.model.NoteModel
+import com.lucassimao.listadetarefas.data.model.TaskModel
 
 @Database(
-    entities = [NoteModel::class],
+    entities = [TaskModel::class],
     version = 2,
     autoMigrations = [
         AutoMigration(from = 1, to = 2)

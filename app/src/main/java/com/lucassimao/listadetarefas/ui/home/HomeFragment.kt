@@ -1,4 +1,4 @@
-package com.lucassimao.listadetarefas.ui.fragments
+package com.lucassimao.listadetarefas.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.lucassimao.listadetarefas.R
 import com.lucassimao.listadetarefas.databinding.FragmentHomeBinding
 import com.lucassimao.listadetarefas.ui.NoteViewModel
-import com.lucassimao.listadetarefas.ui.NotesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
