@@ -13,14 +13,14 @@
             android:id="@+id/action_homeFragment_to_insertNoteFragment"
             app:destination="@id/insertNoteFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_updateNoteFragment"
+            android:id="@+id/action_homeFragment_to_updateTaskFragment"
             app:destination="@id/updateNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/insertNoteFragment"
         android:name="com.lucassimao.listadetarefas.ui.insert.InsertTaskFragment"
         android:label="fragment_insert_note"
-        tools:layout="@layout/dialog_fragment_insert_task" />
+        tools:layout="@layout/fragment_insert_task" />
     <fragment
         android:id="@+id/updateNoteFragment"
         android:name="com.lucassimao.listadetarefas.ui.update.UpdateTaskFragment"
