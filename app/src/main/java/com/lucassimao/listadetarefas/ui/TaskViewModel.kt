@@ -2,11 +2,11 @@ package com.lucassimao.listadetarefas.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lucassimao.listadetarefas.data.NoteRepository
+import com.lucassimao.listadetarefas.data.TaskRepository
 import com.lucassimao.listadetarefas.data.model.TaskModel
 import kotlinx.coroutines.launch
 
-class NoteViewModel(private val repository: NoteRepository) : ViewModel() {
+class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
 
     fun insertTask(note: TaskModel) {
         viewModelScope.launch {
@@ -14,18 +14,18 @@ class NoteViewModel(private val repository: NoteRepository) : ViewModel() {
         }
     }
 
-    fun deleteNote(note: TaskModel) {
+    fun deleteTask(note: TaskModel) {
         viewModelScope.launch {
             repository.delete(note)
         }
     }
 
-    fun updateNote(note: TaskModel) {
+    fun updateTask(task: TaskModel) {
         viewModelScope.launch {
-            repository.update(note)
+            repository.update(task)
         }
     }
 
-    val allNotes =  repository.getAllNotes()
+    val listAllTasks =  repository.getAllTasks()
 
 }

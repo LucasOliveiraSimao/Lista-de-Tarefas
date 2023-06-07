@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.lucassimao.listadetarefas.R
 import com.lucassimao.listadetarefas.data.model.TaskModel
 import com.lucassimao.listadetarefas.databinding.FragmentUpdateTaskBinding
-import com.lucassimao.listadetarefas.ui.NoteViewModel
+import com.lucassimao.listadetarefas.ui.TaskViewModel
 import com.lucassimao.listadetarefas.ui.home.HomeFragment
 import com.lucassimao.listadetarefas.utils.emptyFieldMessage
 import com.lucassimao.listadetarefas.utils.isTaskFieldEmpty
@@ -17,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UpdateTaskFragment : Fragment() {
     private lateinit var binding: FragmentUpdateTaskBinding
-    private val viewModel by viewModel<NoteViewModel>()
+    private val viewModel by viewModel<TaskViewModel>()
     private var message: String = ""
 
     override fun onCreateView(
@@ -55,19 +55,18 @@ class UpdateTaskFragment : Fragment() {
     private fun checkBundleNote() {
         val bundle = arguments?.getParcelable<TaskModel>(HomeFragment.KEY)
 
-        bundle?.let { note ->
-            binding.contentUpdateTask.tilTaskTitle.editText?.setText(note.note_title)
+        bundle?.let { task ->
+            binding.contentUpdateTask.tilTaskTitle.editText?.setText(task.name_task)
         }
     }
 
     private fun updateTask() {
         val bundle = arguments?.getParcelable<TaskModel>(HomeFragment.KEY)
 
-        bundle?.let { note ->
-            val id = note.note_id
-            val task = binding.contentUpdateTask.tilTaskTitle.editText?.text.toString()
-            val updatedTask = TaskModel(id, task,"","","",0)
-            viewModel.updateNote(updatedTask)
+        bundle?.let { task ->
+            val nameTask = binding.contentUpdateTask.tilTaskTitle.editText?.text.toString()
+            val updatedTask = TaskModel(task.id, nameTask, task.check_task)
+            viewModel.updateTask(updatedTask)
         }
     }
 
