@@ -7,28 +7,36 @@
     android:background="#e0e0e0"
     tools:context=".ui.home.HomeFragment">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_delete_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_all"
+        app:layout_constraintBottom_toTopOf="@id/rv_list_tasks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list_notes"
+        android:id="@+id/rv_list_tasks"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/default_margin_8"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/fab_insert_note"
+        app:layout_constraintBottom_toTopOf="@id/fab_insert_task"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_note" />
+        app:layout_constraintTop_toBottomOf="@id/btn_delete_all"
+        tools:listitem="@layout/item_task" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_insert_note"
+        android:id="@+id/fab_insert_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin_16"
         android:contentDescription="@string/insert_task"
         android:src="@drawable/ic_add"
         android:tintMode="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/rv_list_notes"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_list_tasks" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

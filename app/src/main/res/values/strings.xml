@@ -7,4 +7,5 @@
     <string name="edit_note">Editar</string>
     <string name="delete_note">Excluir</string>
     <string name="insert_task">Inserir tarefa</string>
+    <string name="delete_all">Apagar tudo</string>
 </resources>

@@ -9,14 +9,14 @@ import androidx.navigation.fragment.findNavController
 import com.lucassimao.listadetarefas.R
 import com.lucassimao.listadetarefas.data.model.TaskModel
 import com.lucassimao.listadetarefas.databinding.FragmentInsertTaskBinding
-import com.lucassimao.listadetarefas.ui.NoteViewModel
+import com.lucassimao.listadetarefas.ui.TaskViewModel
 import com.lucassimao.listadetarefas.utils.emptyFieldMessage
 import com.lucassimao.listadetarefas.utils.isTaskFieldEmpty
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InsertTaskFragment : Fragment() {
     private lateinit var binding: FragmentInsertTaskBinding
-    private val viewModel by viewModel<NoteViewModel>()
+    private val viewModel by viewModel<TaskViewModel>()
     private var message: String = ""
 
     override fun onCreateView(
@@ -48,7 +48,7 @@ class InsertTaskFragment : Fragment() {
                 showEmptyFieldMessage(message)
             } else {
                 val task = editText?.text.toString()
-                val newTask = TaskModel(0, task,"","","",0)
+                val newTask = TaskModel(0, task, false)
 
                 viewModel.insertTask(newTask)
 
