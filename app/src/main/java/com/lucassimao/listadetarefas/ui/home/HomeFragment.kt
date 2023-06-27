@@ -24,8 +24,15 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         setupRecyclerView()
         setupFabClickListener()
+        setupDeleteAllTasks()
 
         return binding.root
+    }
+
+    private fun setupDeleteAllTasks() {
+        binding.btnDeleteAll.setOnClickListener {
+            viewModel.deleteAllTasks()
+        }
     }
 
     private fun setupFabClickListener() {
@@ -39,20 +46,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = TaskAdapter(object : OnItemClickListener {
-            override fun onItemClick(task: TaskModel, isChecked: Boolean) {
-                val updateTask = TaskModel(task.id, task.name_task, isChecked)
-                viewModel.updateTask(updateTask)
-            }
-        })
-        binding.rvListTasks.adapter = adapter
+        setupAdapter()
         observeTasks()
         setupTaskActions()
+        setupClickItemCheckBox()
+    }
+
+    private fun setupAdapter() {
+        adapter = TaskAdapter()
+        binding.rvListTasks.adapter = adapter
     }
 
     private fun observeTasks() {
-        viewModel.listAllTasks.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewModel.listAllTasks.observe(viewLifecycleOwner) { tasks ->
+            adapter.submitList(tasks)
         }
     }
 
@@ -68,6 +75,13 @@ class HomeFragment : Fragment() {
 
         adapter.deleteTask = { task ->
             viewModel.deleteTask(task)
+        }
+    }
+
+    private fun setupClickItemCheckBox() {
+        adapter.clickItemCheckBox = { task: TaskModel, isChecked: Boolean ->
+            val updateTask = TaskModel(task.id, task.name_task, isChecked)
+            viewModel.updateTask(updateTask)
         }
     }
 
