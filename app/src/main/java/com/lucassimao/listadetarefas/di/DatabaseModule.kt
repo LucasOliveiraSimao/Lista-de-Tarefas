@@ -17,7 +17,7 @@ val databaseModule = module {
     }
 
     fun provideNoteDAO(database: TaskDatabase): TaskDAO {
-        return database.noteDAO
+        return database.taskDAO
     }
 
     single { provideNoteDatabase(androidApplication()) }
