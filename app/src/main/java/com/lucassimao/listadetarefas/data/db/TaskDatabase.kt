@@ -18,7 +18,7 @@ import com.lucassimao.listadetarefas.data.model.TaskModel
     ]
 )
 abstract class TaskDatabase : RoomDatabase() {
-    abstract val noteDAO: TaskDAO
+    abstract val taskDAO: TaskDAO
 
     @DeleteColumn(tableName = "note_table", columnName = "note_desc")
     @DeleteColumn(tableName = "note_table", columnName = "note_date")
