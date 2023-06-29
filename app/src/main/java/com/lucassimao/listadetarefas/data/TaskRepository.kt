@@ -18,4 +18,7 @@ class TaskRepository(private val dao: TaskDAO) {
 
     fun getAllTasks() = dao.getAllTasks()
 
+    suspend fun deleteAllTasks() {
+        return dao.deleteAllTasks()
+    }
 }

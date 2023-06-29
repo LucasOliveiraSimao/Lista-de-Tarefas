@@ -8,18 +8,18 @@ import com.lucassimao.listadetarefas.data.model.TaskModel
 import com.lucassimao.listadetarefas.databinding.ItemTaskBinding
 import com.lucassimao.listadetarefas.utils.showPopMenu
 
-class TaskAdapter(private val listener: OnItemClickListener) :
-    ListAdapter<TaskModel, TaskViewHolder>(TaskModel) {
+class TaskAdapter : ListAdapter<TaskModel, TaskViewHolder>(TaskModel) {
 
     var deleteTask: (TaskModel) -> Unit = {}
     var updateTask: (TaskModel) -> Unit = {}
+    var clickItemCheckBox: (TaskModel, Boolean) -> Unit = { _: TaskModel, _: Boolean -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        return TaskViewHolder.from(parent, deleteTask, updateTask)
+        return TaskViewHolder.from(parent, deleteTask, updateTask, clickItemCheckBox)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(getItem(position), listener)
+        holder.bind(getItem(position))
     }
 }
 
@@ -27,16 +27,17 @@ class TaskViewHolder(
     private val binding: ItemTaskBinding,
     private val deleteTask: (TaskModel) -> Unit,
     private val updateTask: (TaskModel) -> Unit,
+    private val clickItemCheckBox: (TaskModel, Boolean) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: TaskModel, listener: OnItemClickListener) {
+    fun bind(item: TaskModel) {
         binding.apply {
 
             itemTitleNote.text = item.name_task
             itemCheckTask.isChecked = item.check_task
 
             itemCheckTask.setOnClickListener {
-                listener.onItemClick(item, itemCheckTask.isChecked)
+                clickItemCheckBox(item, itemCheckTask.isChecked)
             }
 
             ivMore.setOnClickListener {
@@ -51,11 +52,13 @@ class TaskViewHolder(
             parent: ViewGroup,
             deleteTask: (TaskModel) -> Unit,
             updateTask: (TaskModel) -> Unit,
+            clickItemCheckBox: (TaskModel, Boolean) -> Unit
         ): TaskViewHolder {
             return TaskViewHolder(
                 ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false),
                 deleteTask,
-                updateTask
+                updateTask,
+                clickItemCheckBox
             )
         }
     }
