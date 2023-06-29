@@ -119,6 +119,11 @@ obj/
 .idea/gradle.xml
 .idea/jarRepositories.xml
 .idea/navEditor.xml
+.idea/deploymentTargetDropDown.xml
+.idea/render.experimental.xml
+.idea/kotlinc.xml
+.idea/other.xml
+.idea/androidTestResultsUserPreferences.xml
 
 # Legacy Eclipse project files
 .classpath
