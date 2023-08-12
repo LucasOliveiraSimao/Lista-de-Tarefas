@@ -5,10 +5,11 @@
     android:id="@+id/container_note"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/default_margin_8"
+    tools:showIn="@layout/fragment_home"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginBottom="2dp"
     android:background="@drawable/bg_card_view"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="3dp">
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
         <TextView
             android:id="@+id/item_title_note"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:padding="@dimen/default_margin_2"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -26,7 +27,7 @@
             app:layout_constraintEnd_toStartOf="@+id/item_check_task"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Nota" />
+            tools:text="@string/example_title_task" />
 
         <CheckBox
             android:id="@+id/item_check_task"

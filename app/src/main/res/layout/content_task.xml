@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="left"
-            android:inputType="textCapSentences"
+            android:inputType="textCapSentences|textMultiLine"
             android:textSize="24sp"
             tools:ignore="RtlHardcoded" />
 
@@ -28,11 +28,10 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_cancel_task"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginBottom="@dimen/default_margin_8"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/white"
         android:text="@string/cancel"
         app:layout_constraintBottom_toTopOf="@id/btn_save_task"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,11 +40,11 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save_task"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginBottom="@dimen/default_margin_16"
         android:background="@drawable/button_state"
-        android:text="@string/save"
         android:enabled="false"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

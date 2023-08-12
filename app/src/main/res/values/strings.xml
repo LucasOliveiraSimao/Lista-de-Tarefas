@@ -8,4 +8,5 @@
     <string name="delete_note">Excluir</string>
     <string name="insert_task">Inserir tarefa</string>
     <string name="delete_all">Apagar tudo</string>
+    <string name="example_title_task">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor non eros et pellentesque.</string>
 </resources>
