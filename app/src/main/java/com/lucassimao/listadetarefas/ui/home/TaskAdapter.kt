@@ -6,16 +6,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lucassimao.listadetarefas.data.model.TaskModel
 import com.lucassimao.listadetarefas.databinding.ItemTaskBinding
-import com.lucassimao.listadetarefas.utils.showPopMenu
 
 class TaskAdapter : ListAdapter<TaskModel, TaskViewHolder>(TaskModel) {
 
-    var deleteTask: (TaskModel) -> Unit = {}
     var updateTask: (TaskModel) -> Unit = {}
     var clickItemCheckBox: (TaskModel, Boolean) -> Unit = { _: TaskModel, _: Boolean -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        return TaskViewHolder.from(parent, deleteTask, updateTask, clickItemCheckBox)
+        return TaskViewHolder.from(parent, updateTask, clickItemCheckBox)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
@@ -25,7 +23,6 @@ class TaskAdapter : ListAdapter<TaskModel, TaskViewHolder>(TaskModel) {
 
 class TaskViewHolder(
     private val binding: ItemTaskBinding,
-    private val deleteTask: (TaskModel) -> Unit,
     private val updateTask: (TaskModel) -> Unit,
     private val clickItemCheckBox: (TaskModel, Boolean) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
@@ -40,9 +37,8 @@ class TaskViewHolder(
                 clickItemCheckBox(item, itemCheckTask.isChecked)
             }
 
-            ivMore.setOnClickListener {
-                showPopMenu(item, ivMore, deleteTask, updateTask)
-
+            ivEdit.setOnClickListener {
+                updateTask(item)
             }
         }
     }
@@ -50,13 +46,11 @@ class TaskViewHolder(
     companion object {
         fun from(
             parent: ViewGroup,
-            deleteTask: (TaskModel) -> Unit,
             updateTask: (TaskModel) -> Unit,
             clickItemCheckBox: (TaskModel, Boolean) -> Unit
         ): TaskViewHolder {
             return TaskViewHolder(
                 ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                deleteTask,
                 updateTask,
                 clickItemCheckBox
             )
